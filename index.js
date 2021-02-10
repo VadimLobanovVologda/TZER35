@@ -83,18 +83,19 @@ console.log(
 // Task 3
 
 // Функция находит индекс последнего символа из двух в строке (почему-то болше нуля, поэтому сделал от нулевого индекса)
+// Данная функция также считает и строку, состоящую из пробелов, т.к. не было других условий.
 
-const string = 'string';
-const a = 's';
-const b = 'g';
+const string = 'st ring';
+const a = ' ';
+const b = 's';
 
 function lastIndex(s = '', a = '', b = '') {
-  if (s.trim().match(/^$/)) {
+  if (s.match(/^$/)) {
     return -1;
   }
 
-  var i = s.length - 1;
-  var index = -1;
+  let i = s.length - 1;
+  let index = -1;
 
   while (index === -1 && i >= 0) {
     //i >= 0 а было i > 0
@@ -122,7 +123,7 @@ console.log(
 // Если переписать функцию
 
 const newLastIndex = (s = '', a = '', b = '') => {
-  if (s.trim().match(/^$/)) {
+  if (s.match(/^$/)) {
     return -1;
   }
   return [...s].reduce((lastInd, char, index) => {
@@ -132,5 +133,44 @@ const newLastIndex = (s = '', a = '', b = '') => {
     return lastInd;
   }, -1);
 };
+console.log(
+  `In the line "${string}", the last index among "${a}" and "${b}" = `,
+  newLastIndex(string, a, b)
+);
 
-console.log(newLastIndex(string, a, b));
+// ============================================================================
+// Task 4
+
+function drawRating(vote) {
+  if (vote >= 0 && vote <= 20) {
+    return '★☆☆☆☆';
+  } else if (vote > 20 && vote <= 40) {
+    return '★★☆☆☆';
+  } else if (vote > 40 && vote <= 60) {
+    return '★★★☆☆';
+  } else if (vote > 60 && vote <= 80) {
+    return '★★★★☆';
+  } else if (vote > 80 && vote <= 100) {
+    return '★★★★★';
+  }
+}
+
+// Проверка работы результата
+console.log(drawRating(0)); // ★☆☆☆☆
+console.log(drawRating(1)); // ★☆☆☆☆
+console.log(drawRating(50)); // ★★★☆☆
+console.log(drawRating(99)); // ★★★★★
+
+// Если переписать функцию:
+
+const newDrawRating = (vote) => {
+  return [...new Array(5)]
+    .map((_, index) => (Math.floor(vote / 21) < index ? '☆' : '★'))
+    .join('');
+};
+
+// Проверка работы результата
+console.log(drawRating(0)); // ★☆☆☆☆
+console.log(drawRating(1)); // ★☆☆☆☆
+console.log(drawRating(50)); // ★★★☆☆
+console.log(drawRating(99)); // ★★★★★
