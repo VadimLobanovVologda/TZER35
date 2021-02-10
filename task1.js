@@ -6,13 +6,13 @@ const dscount = (str, s1, s2) => {
   const lowString = str.toLowerCase();
 
   const { matchCounter } = [...lowString].reduce(
-    (acc, element, index) => {
-      const { previous, matchCounter } = acc;
+    (counter, element, index) => {
+      const { previous, matchCounter } = counter;
 
       if (index > 0 && previous === s1 && element === s2) {
         return { previous: element, matchCounter: matchCounter + 1 };
       }
-      return { ...acc, previous: element };
+      return { ...counter, previous: element };
     },
     { previous: s1, matchCounter: 0 }
   );

@@ -16,9 +16,12 @@ const cookingTime = (pancakes, numberIterations = 0) => {
 
   if (isNotCooked) {
     const newPancakes = pancakes
-      .map((sidesCooked, indexFryingPan) =>
-        indexFryingPan < numberFryingPan ? sidesCooked + 1 : sidesCooked
-      )
+      .map((sidesCooked, indexFryingPan) => {
+        if (indexFryingPan < numberFryingPan) {
+          return sidesCooked + 1;
+        }
+        return sidesCooked;
+      })
       .sort();
     return cookingTime(newPancakes, numberIterations + 1);
   }
@@ -32,7 +35,7 @@ console.log(
 );
 
 /*
-Изначально у нас есть 3 блинчика с 2 сторонами и 2 сковороды.
+Изначально у нас есть 3 блинчика с 2 сторонами и 2 сковороды. (массив из 3 "блинчиков" со значением количества обжаренных сторон - изначално 0, 2 - "приготовлен")
 Так как мы не можем жарить одновременно две стороны одного блинчика, то во избежание ситуации, когда число блинчиков нечетное
 и в конце остается жариться 1 блинчик, необходимо на каждой итерации жарить наименее прожареные блинчики.
 Т.е. если у меня 3 блинчика, то сначала я пожарю с одной стороны два блинчика,

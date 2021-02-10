@@ -1,6 +1,7 @@
 'use strict';
 console.log('\n================================================');
 console.log('Task 5 - Практические задачи');
+
 const parseUrl = (url) => new URL(url);
 
 const a = parseUrl('http://tutu.ru:8080/do/any.php?a=1&b[]=a&b[]=b#foo');

@@ -17,7 +17,6 @@ function lastIndex(s = '', a = '', b = '') {
   let index = -1;
 
   while (index === -1 && i >= 0) {
-    // i > 0 изменил на i >= 0
     if (s.substring(i, i + 1) === a) {
       index = i;
       break;
@@ -40,6 +39,7 @@ console.log(
 );
 
 // Если переписать функцию
+console.log('------');
 
 const newLastIndex = (s = '', a = '', b = '') => {
   if (s.match(/^$/)) {
@@ -52,6 +52,7 @@ const newLastIndex = (s = '', a = '', b = '') => {
     return lastInd;
   }, -1);
 };
+
 console.log(
   `In the line "${string}", the last index among "${aChar}" and "${bChar}" = `,
   newLastIndex(string, aChar, bChar)
