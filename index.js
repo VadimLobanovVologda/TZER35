@@ -79,3 +79,58 @@ console.log(
 в конце я дожарю не прожаренные стороны оставшихся двух блинчиков.
 */
 
+// ==============================================================================================
+// Task 3
+
+// Функция находит индекс последнего символа из двух в строке (почему-то болше нуля, поэтому сделал от нулевого индекса)
+
+const string = 'string';
+const a = 's';
+const b = 'g';
+
+function lastIndex(s = '', a = '', b = '') {
+  if (s.trim().match(/^$/)) {
+    return -1;
+  }
+
+  var i = s.length - 1;
+  var index = -1;
+
+  while (index === -1 && i >= 0) {
+    //i >= 0 а было i > 0
+    if (s.substring(i, i + 1) === a) {
+      index = i;
+      break;
+    }
+    if (s.substring(i, i + 1) === b) {
+      index = i;
+    }
+    i = i - 1;
+  }
+
+  if (index !== -1) {
+    return index;
+  }
+  return -1;
+}
+
+console.log(
+  `In the line "${string}", the last index among "${a}" and "${b}" = `,
+  lastIndex(string, a, b)
+);
+
+// Если переписать функцию
+
+const newLastIndex = (s = '', a = '', b = '') => {
+  if (s.trim().match(/^$/)) {
+    return -1;
+  }
+  return [...s].reduce((lastInd, char, index) => {
+    if (char === a || char === b) {
+      return index;
+    }
+    return lastInd;
+  }, -1);
+};
+
+console.log(newLastIndex(string, a, b));
